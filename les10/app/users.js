@@ -4,18 +4,20 @@ export class Users{
             inp : document.querySelector('.inp-count'),
             btn : document.querySelector('.btn-count'),
             table : document.querySelector('.table-users'),
-            btnCountryUp : document.querySelector('.btn-country-up'),
-            btnCountryDown : document.querySelector('.btn-country-down')
+            btnsSort : document.querySelectorAll('.btn-sort')
         };
-        this.link = 'https://randomuser.me/api/?results='
+        this.link = 'https://randomuser.me/api/?results=';
 
         // this.dom.btn.addEventListener('click', this.addUsers.bind(this));
         
         // this.dom.btn.addEventListener('click', ()=> this.addUsers());
         
         this.dom.btn.addEventListener('click', this.addUsers);
-        this.dom.btnCountryUp.addEventListener('click', () => this.sortCountry());
-        this.dom.btnCountryDown.addEventListener('click', () => this.sortCountry(false));
+
+        this.dom.btnsSort.forEach(btn => {
+            btn.addEventListener('click', () => this.sortArr(btn.dataset.isUp === 'true', btn.dataset.type));
+        });
+
     }
 
     addUsers = () => {
@@ -24,32 +26,54 @@ export class Users{
             .then(r => r.json())
             .then(d => {
                 console.log(d);
-                this.data = d.results;
-                this.renderUsers(d.results);
+                this.data = d.results.map(el=>{
+                    return {
+                        username : el.login.username,
+                        email : el.email,
+                        password : el.login.password,
+                        country : el.location.country,
+                        age : el.dob.age
+                    };
+                });
+                this.renderUsers(this.data);
             });
     }
 
     renderUsers(arr){
         const users = arr.map(us => {
             return `<tr>
-                <td>${us.login.username}</td>
+                <td>${us.username}</td>
                 <td>${us.email}</td>
-                <td>${us.login.password}</td>
-                <td>${us.location.country}</td>
-                <td>${us.dob.age}</td>
-            </tr>`
+                <td>${us.password}</td>
+                <td>${us.country}</td>
+                <td>${us.age}</td>
+            </tr>`;
         });
 
         this.dom.table.innerHTML = users.join('');
     }
 
-    sortCountry(isUp = true){
+    sortArr(isUp = true, sortName = 'country'){
         const one = isUp? 1: -1;
         this.data.sort((a, b) => {
-            return a.location.country > b.location.country? one: -1 * one;
+            return a[sortName] > b[sortName]? one: -1 * one;
         });
 
         this.renderUsers(this.data);
+    }
+
+    searchHandler = (str = '') => {
+        let sArr = [];
+        if(str === ''){
+            sArr = this.data;
+        }else{
+            const sReg = new RegExp(str, 'i');
+            sArr = this.data.filter(user => sReg.test(Object.values(user).join('')));
+        }
+
+
+
+        this.renderUsers(sArr);
     }
 
 }

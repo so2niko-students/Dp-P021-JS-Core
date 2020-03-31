@@ -1,4 +1,5 @@
 import { Users } from './users.js';
+import { Search } from './search.js';
 
 class Box{
     constructor(w,l,h){
@@ -35,3 +36,4 @@ const b = new ExtendedBox(2, 2, 3, 50);
 console.log(b.isFit(1, 1, 4, 33));
 
 const users = new Users();
+const search = new Search(users.searchHandler);

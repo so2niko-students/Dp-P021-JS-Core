@@ -9,18 +9,71 @@
     <nav>
         <input type="number" class="inp-count" value="1">
         <button class="btn-count">Add</button>
+        <input type="search" class="inp-search">
+        <button class="btn-search">Search</button>
     </nav>
     <table>
         <thead>
             <tr>
-                <th>username</th>
-                <th>email</th>
-                <th>password</th>
-                <th>country 
-                    <button class="btn-country-up">up</button>
-                    <button class="btn-country-down">down</button>
+                <th>username
+                    <button 
+                        class="btn-sort"
+                        data-is-up="true"
+                        data-type="username"
+                    > up </button>
+                    <button 
+                        class="btn-sort"
+                        data-is-up="false"
+                        data-type="username"
+                    >down</button>
                 </th>
-                <th>age</th>
+                <th>email
+                    <button 
+                        class="btn-sort"
+                        data-is-up="true"
+                        data-type="email"
+                    >up</button>
+                    <button 
+                        class="btn-sort"
+                        data-is-up="false"
+                        data-type="email"
+                    >down</button>
+                </th>
+                <th>password
+                    <button 
+                        class="btn-sort"
+                        data-is-up="true"
+                        data-type="password"
+                    >up</button>
+                    <button 
+                        class="btn-sort"
+                        data-is-up="false"
+                        data-type="password"
+                    >down</button>
+                </th>
+                <th>country 
+                    <button 
+                        class="btn-sort"
+                        data-is-up="true"
+                        data-type="country"
+                    >up</button>
+                    <button 
+                        class="btn-sort"
+                        data-is-up="false"
+                        data-type="country"
+                    >down</button>
+                </th>
+                <th>age
+                    <button 
+                        class="btn-sort"
+                        data-is-up="true"
+                        data-type="age"
+                    >up</button>
+                    <button 
+                        class="btn-sort"
+                        data-is-up="false"
+                        data-type="age"
+                    >down</button></th>
             </tr>
         </thead>
         <tbody class="table-users">
