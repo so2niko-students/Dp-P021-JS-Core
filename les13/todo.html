@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .done{
+            text-decoration: line-through;
+            color: grey;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="todoApp">
+        <h3>ToDo List</h3>
+        <ul>
+            <li v-for="el in tasks">
+                <input 
+                type="checkbox" 
+                v-model:checked="el.isDone"
+                v-on:input="handleClickDone">
+                <span 
+                v-bind:class="{done : el.isDone}">{{ el.text }}</span>
+            </li>
+        </ul>
+        <nav>
+            <input type="text"
+            placeholder="Type your task"
+            v-model="newTask"
+            v-on:keyup.enter="addTask"
+            >
+        </nav>
+    </div>
+    <script src="app/todo.js"></script>
+</body>
+</html>
