@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- ПОдключение Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <main id="vueApp">
+        <!-- Биндинг аттрибутов -->
+        <h1 
+        v-bind:title="description" > {{ group }} <!-- Декларативный рендеринг --></h1>
+        <!-- Условия -->
+        <p>
+            <!-- Добавление слушателей событий -->
+            <button v-on:click="showStatus">show status</button>
+            <span v-if="isOpen">Course is online</span>
+        </p>
+        <h5>Students <small>{{ studentCount }}</small>:</h5>
+        <ul>
+            <!-- Циклы -->
+            <li v-for="st in students">
+                {{ st }}
+            </li>
+        </ul>
+        <h5>Add student</h5>
+        <p>
+            <!-- 2 way binding -->
+            <input type="text" v-model="newStudent">
+            <button v-on:click="addStudent">Add</button>
+        </p>
+    </main>
+    <script src="app/main.js"></script>
+</body>
+</html>
